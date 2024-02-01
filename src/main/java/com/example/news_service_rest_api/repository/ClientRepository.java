@@ -1,0 +1,21 @@
+package com.example.news_service_rest_api.repository;
+
+import com.example.news_service_rest_api.model.Client;
+
+import java.util.List;
+import java.util.Optional;
+
+public interface ClientRepository {
+
+    List<Client> findAll();
+
+    Optional<Client> findById(Long id);
+
+    Client save(Client client);
+
+    Client update(Client client);
+
+    void deleteById(Long id);
+
+
+}
