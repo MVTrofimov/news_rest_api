@@ -22,7 +22,6 @@ public abstract class CommentMapperDelegate implements CommentMapperV2{
     public CommentToNews requestToComment(UpsertCommentRequest request){
         CommentToNews comment = new CommentToNews();
 
-        comment.setClient(databaseClientService.findById(request.getClientId()));
         comment.setOneNews(databaseNewsService.findById(request.getOneNewsId()));
         comment.setComment(request.getComment());
 

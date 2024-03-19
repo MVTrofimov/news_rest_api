@@ -11,6 +11,9 @@ import com.example.news_service_rest_api.services.CommentService;
 import com.example.news_service_rest_api.web.models.comment.DeleteCommentRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.text.MessageFormat;
@@ -36,7 +39,8 @@ public class DatabaseCommentToNewsService implements CommentService {
 
     @Override
     public CommentToNews save(CommentToNews comment) {
-        Client client = clientService.findById(comment.getClient().getId());
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Client client = clientService.findByClientName(userDetails.getUsername());
         News oneNews = newsService.findById(comment.getOneNews().getId());
 
         oneNews.setAmountOfComments(oneNews.getAmountOfComments() + 1);
@@ -50,7 +54,8 @@ public class DatabaseCommentToNewsService implements CommentService {
     @CommentUpdateAccessRightsValidation
     public CommentToNews update(CommentToNews comment) {
         CommentToNews existedComment = findById(comment.getId());
-        Client client = clientService.findById(comment.getClient().getId());
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Client client = clientService.findByClientName(userDetails.getUsername());
         News oneNews = newsService.findById(comment.getOneNews().getId());
 
         BeanUtils.copyProperties(comment, existedComment);
@@ -64,7 +69,7 @@ public class DatabaseCommentToNewsService implements CommentService {
 
     @Override
     @CommentDeleteAccessRightsValidation
-    public void deleteById(Long id, DeleteCommentRequest request) {
+    public void deleteById(Long id) {
         CommentToNews comment = findById(id);
         News oneNews = comment.getOneNews();
         oneNews.setAmountOfComments(oneNews.getAmountOfComments() - 1);

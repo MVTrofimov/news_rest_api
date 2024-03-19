@@ -20,7 +20,6 @@ public abstract class NewsMapperDelegate implements NewsMapperV2{
 
         oneNews.setNameOfNews(request.getNameOfNews());
         oneNews.setDescription(request.getDescription());
-        oneNews.setClient(databaseClientService.findById(request.getClientId()));
         oneNews.setCategory(databaseCategoryOfNewsService.findById(request.getCategoryId()));
 
         return oneNews;

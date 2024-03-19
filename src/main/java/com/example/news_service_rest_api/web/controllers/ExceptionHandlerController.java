@@ -1,6 +1,7 @@
 package com.example.news_service_rest_api.web.controllers;
 
 import com.example.news_service_rest_api.exception.AccessRightsException;
+import com.example.news_service_rest_api.exception.AlreadyExistsException;
 import com.example.news_service_rest_api.exception.EntityNotFoundException;
 import com.example.news_service_rest_api.web.models.errors.ErrorResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -49,6 +50,13 @@ public class ExceptionHandlerController {
     public ResponseEntity<ErrorResponse> notValidRequestParameters(){
         ErrorResponse response = new ErrorResponse();
         response.setErrorMessage("Параметры для пагинации должны быть указаны!");
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+    }
+
+    @ExceptionHandler(AlreadyExistsException.class)
+    public ResponseEntity<ErrorResponse> alreadyExistNameOfUser(){
+        ErrorResponse response = new ErrorResponse();
+        response.setErrorMessage("Имя пользователя уже используется, введите другое!");
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
     }
 }

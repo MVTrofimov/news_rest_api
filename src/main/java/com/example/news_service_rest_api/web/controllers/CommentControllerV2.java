@@ -43,8 +43,8 @@ public class CommentControllerV2 {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteById(@PathVariable Long id, @Valid @RequestBody DeleteCommentRequest request){
-        databaseCommentService.deleteById(id, request);
+    public ResponseEntity<Void> deleteById(@PathVariable Long id){
+        databaseCommentService.deleteById(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 }

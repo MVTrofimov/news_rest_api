@@ -4,6 +4,7 @@ import com.example.news_service_rest_api.model.Client;
 import com.example.news_service_rest_api.services.ClientService;
 import com.example.news_service_rest_api.web.models.client.ClientListResponse;
 import com.example.news_service_rest_api.web.models.client.ClientResponse;
+import com.example.news_service_rest_api.web.models.client.UpdateClientRequest;
 import com.example.news_service_rest_api.web.models.client.UpsertClientRequest;
 import org.mapstruct.DecoratedWith;
 import org.mapstruct.Mapper;
@@ -17,9 +18,7 @@ import java.util.stream.Collectors;
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE, uses = {NewsMapperV2.class})
 public interface ClientsMapperV2 {
 
-    Client requestToClient(UpsertClientRequest request);
-
-    Client requestToClient(Long clientId, UpsertClientRequest request);
+    Client requestToClient(Long clientId, UpdateClientRequest request);
 
     ClientResponse clientToClientResponse(Client client);
 

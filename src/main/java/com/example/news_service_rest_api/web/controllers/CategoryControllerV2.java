@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -37,6 +38,7 @@ public class CategoryControllerV2 {
     }
 
     @PostMapping
+    @PreAuthorize("hasRole('ROLE_ADMIN') || hasRole('ROLE_MODERATOR')")
     public ResponseEntity<CategoryResponse> create (@Valid @RequestBody UpsertCategoryRequest request){
         CategoryOfNews newCategory = databaseCategoryService.save(categoryMapper.requestToCategory(request));
 
@@ -44,6 +46,7 @@ public class CategoryControllerV2 {
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN') || hasRole('ROLE_MODERATOR')")
     public ResponseEntity<CategoryResponse> update (@PathVariable Long id, @Valid @RequestBody UpsertCategoryRequest request){
         CategoryOfNews updatedCategory = databaseCategoryService.update(categoryMapper.requestToCategory(id, request));
 
@@ -51,6 +54,7 @@ public class CategoryControllerV2 {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN') || hasRole('ROLE_MODERATOR')")
     public ResponseEntity<Void> delete (@PathVariable Long id){
         databaseCategoryService.deleteById(id);
 

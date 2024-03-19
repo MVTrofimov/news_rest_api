@@ -11,6 +11,8 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -60,8 +62,8 @@ public class NewsControllerV2 {
 
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteById(@PathVariable Long id, @Valid @RequestBody DeleteNewsRequest request){
-        databaseNewsService.deleteById(id, request);
+    public ResponseEntity<Void> deleteById(@PathVariable Long id){
+        databaseNewsService.deleteById(id);
 
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }

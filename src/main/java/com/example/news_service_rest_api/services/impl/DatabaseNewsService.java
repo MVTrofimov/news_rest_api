@@ -13,6 +13,8 @@ import com.example.news_service_rest_api.web.models.news.DeleteNewsRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.text.MessageFormat;
@@ -45,7 +47,8 @@ public class DatabaseNewsService implements NewsService {
 
     @Override
     public News save(News oneNews) {
-        Client client = clientService.findById(oneNews.getClient().getId());
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Client client = clientService.findByClientName(userDetails.getUsername());
         oneNews.setClient(client);
         return newsRepository.save(oneNews);
     }
@@ -53,7 +56,8 @@ public class DatabaseNewsService implements NewsService {
     @Override
     @NewsUpdateAccessRightsValidation
     public News update(News oneNews) {
-        Client client = clientService.findById(oneNews.getClient().getId());
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Client client = clientService.findByClientName(userDetails.getUsername());
         News existedNews = findById(oneNews.getId());
 
         BeanUtils.copyProperties(oneNews, existedNews);
@@ -64,7 +68,7 @@ public class DatabaseNewsService implements NewsService {
 
     @Override
     @NewsDeleteAccessRightsValidation
-    public void deleteById(Long id, DeleteNewsRequest request) {
+    public void deleteById(Long id) {
         newsRepository.deleteById(id);
     }
 

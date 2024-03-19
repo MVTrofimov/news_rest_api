@@ -15,7 +15,7 @@ public interface CommentService {
 
     CommentToNews update(CommentToNews comment);
 
-    void deleteById(Long id, DeleteCommentRequest request);
+    void deleteById(Long id);
 
     void deleteByIdIn(List<Long> ids);
 

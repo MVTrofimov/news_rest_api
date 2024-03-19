@@ -9,10 +9,6 @@ import lombok.Data;
 @Data
 public class UpsertNewsRequest {
 
-
-    @Positive(message = "ID клиента может быть только положительным!")
-    private Long clientId;
-
     @NotBlank(message = "Поле название новости должно быть заполнено!")
     private String nameOfNews;
 

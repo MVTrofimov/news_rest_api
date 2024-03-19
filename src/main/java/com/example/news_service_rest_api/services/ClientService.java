@@ -1,6 +1,7 @@
 package com.example.news_service_rest_api.services;
 
 import com.example.news_service_rest_api.model.Client;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.List;
 
