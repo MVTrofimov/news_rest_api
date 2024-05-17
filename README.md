@@ -33,7 +33,4 @@ __Working with data in the application is divided into 3 main levels: the contro
 * __Repository level:__ At this level of work, the database is being worked on using CRUD operations.
 ___
 ## Security
-__Security in this application is implemented using Spring basic auth. Some security functionality is put into separate aspects and used as annotations. The application supports three types of users: admin, moderator and user. Based on the rights granted to the user, the user can perform only those actions that are allowed to the user with this level of rights.__
-___
-## Docker
-__The application database is deployed on docker using docker-compose.yml file__
+__Security in this application is implemented using Spring basic auth. The application supports three types of users: admin, moderator and user. Based on the rights granted to the user, the user can perform only those actions that are allowed to the user with this level of rights.__
