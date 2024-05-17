@@ -30,7 +30,6 @@ public class Client {
     private List<News> news = new ArrayList<>();
 
     @ElementCollection(targetClass = RoleType.class, fetch = FetchType.EAGER)
-//    @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "client_id"))
     @CollectionTable(
             name = "user_roles",
             joinColumns = @JoinColumn(name = "client_id"),

@@ -18,7 +18,7 @@ public interface NewsService {
 
     News update(News oneNews);
 
-    void deleteById(Long id);
+    void deleteById(Long id );
 
     void deleteByIdIn(List<Long> ids);
 
