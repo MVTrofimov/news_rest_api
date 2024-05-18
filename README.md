@@ -21,6 +21,12 @@ ___
 * __PostgreSQL__
 * __Docker__
 ___
+## API capabilities
+* create and manage users;
+* create and manage news categories;
+* create and manage news;
+* create and manage comments for news and manage them.
+___
 ## Database schema
 
 ![img_2.png](img_2.png)
