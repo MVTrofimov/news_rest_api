@@ -29,7 +29,7 @@ ___
 ___
 ## Database schema
 
-![img_2.png](img_2.png)
+![img_2.png](https://github.com/MVTrofimov/news_rest_api/blob/main/2024-05-17_23-30-47.png)
 ___
 ## Structure
 __Working with data in the application is divided into 3 main levels: the controller level, the service level and the repository level.__
